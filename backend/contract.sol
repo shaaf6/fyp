@@ -8,13 +8,13 @@ contract PolicyRegistry {
         bytes32 policyHash;
     }
 
-    // name => policy data
+   
     mapping(string => Policy) public policies;
 
-    // store names for listing all
+    
     string[] public policyNames;
 
-    /// add a new policy with a hash
+    
     function addPolicy(string calldata name, bytes32 policyHash) external {
         require(bytes(name).length > 0, "empty name");
         require(policies[name].createdAt == 0, "already exists");
@@ -28,14 +28,14 @@ contract PolicyRegistry {
         policyNames.push(name);
     }
 
-    /// update an existing policy's hash only
+    
     function updatePolicyHash(string calldata name, bytes32 newHash) external {
         require(policies[name].createdAt != 0, "not found");
 
         policies[name].policyHash = newHash;
     }
 
-    /// view all policies as structs
+    
     function getAllPolicies() external view returns (Policy[] memory) {
         Policy[] memory list = new Policy[](policyNames.length);
 
@@ -46,3 +46,4 @@ contract PolicyRegistry {
         return list;
     }
 }
+
