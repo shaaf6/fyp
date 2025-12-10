@@ -10,6 +10,15 @@ const policySchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    prev: {
+        type: String,
+        default: ''
+    },
+    alert: {
+        type: Number,
+        default: 0,
+        enum: [0, 1]
+    },
     createdAt: {
         type: Date,
         default: Date.now
