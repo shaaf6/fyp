@@ -1,0 +1,1197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SBP Circulars Nested Structure Visualizer</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            padding: 20px;
+        }
+
+        #app {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Filter Bar */
+        .filter-bar {
+            background: #ffffff;
+            border: 1px solid #999999;
+            padding: 12px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .filter-control {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .filter-control label {
+            font-size: 13px;
+            font-weight: bold;
+            color: #333333;
+            white-space: nowrap;
+        }
+
+        .filter-control select {
+            padding: 6px 10px;
+            border: 1px solid #999999;
+            background: #f5f5f5;
+            font-size: 13px;
+            min-width: 150px;
+            cursor: pointer;
+        }
+
+        .filter-control input[type="text"] {
+            padding: 6px 10px;
+            border: 1px solid #999999;
+            font-size: 13px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-control {
+            flex: 1;
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        /* Layout */
+        .main-layout {
+            display: flex;
+            gap: 15px;
+            height: calc(100vh - 200px);
+            min-height: 600px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 350px;
+            background: #ffffff;
+            border: 1px solid #999999;
+            padding: 10px;
+            overflow-y: auto;
+        }
+
+        .year-header {
+            font-weight: bold;
+            font-size: 14px;
+            padding: 8px;
+            margin-top: 10px;
+            background: #f5f5f5;
+            border-bottom: 1px solid #cccccc;
+        }
+
+        .year-header:first-child {
+            margin-top: 0;
+        }
+
+        .no-documents {
+            text-align: center;
+            color: #666666;
+            padding: 20px;
+            font-size: 14px;
+        }
+
+        /* Content Area */
+        .content-area {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #999999;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .content-placeholder {
+            text-align: center;
+            color: #666666;
+            padding: 40px;
+            font-size: 14px;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        .error {
+            text-align: center;
+            padding: 40px;
+            font-size: 14px;
+            color: #cc0000;
+        }
+
+        .error-message {
+            padding: 20px;
+            background-color: #fee;
+            color: #c00;
+            border: 1px solid #fcc;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Document Content */
+        .document-title {
+            font-size: 18px;
+            font-weight: bold;
+            border-bottom: 2px solid #999999;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+
+        .document-metadata {
+            font-size: 12px;
+            color: #666666;
+            margin-bottom: 20px;
+        }
+
+        .document-metadata a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .document-metadata a:hover {
+            text-decoration: underline;
+        }
+
+        .document-content p {
+            margin-bottom: 15px;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        .document-content ul,
+        .document-content ol {
+            margin-left: 25px;
+            margin-bottom: 15px;
+        }
+
+        .document-content li {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .document-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 15px;
+            font-size: 13px;
+        }
+
+        .document-content th {
+            background: #e0e0e0;
+            padding: 8px;
+            border: 1px solid #999999;
+            text-align: left;
+        }
+
+        .document-content td {
+            padding: 8px;
+            border: 1px solid #cccccc;
+        }
+
+        .hierarchical-content {
+            margin-bottom: 15px;
+        }
+
+        .sub-content {
+            margin-left: 20px;
+        }
+
+        /* References Section */
+        .references-section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 2px solid #999999;
+        }
+
+        .references-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .reference-item {
+            background: #ffffff;
+            border-left: 3px solid #999999;
+            padding: 8px;
+            margin: 5px 0;
+            cursor: pointer;
+            font-size: 13px;
+            transition: background 0.2s;
+        }
+
+        .reference-item:hover {
+            background: #e0e0e0;
+        }
+
+        /* Tree Node Styles */
+        .tree-node-wrapper {
+            margin: 2px 0;
+        }
+
+        .tree-node {
+            padding: 6px;
+            font-size: 13px;
+            border-left: 2px solid #cccccc;
+            cursor: pointer;
+            transition: background 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .tree-node:hover {
+            background: #f5f5f5;
+        }
+
+        .tree-node.selected {
+            background: #e0e0e0;
+            font-weight: bold;
+            border-left: 3px solid #333333;
+        }
+
+        .expand-icon {
+            display: inline-block;
+            width: 15px;
+            font-weight: bold;
+            margin-right: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .node-title {
+            flex: 1;
+        }
+
+        .depth-warning {
+            font-size: 11px;
+            color: #999999;
+            font-style: italic;
+            margin-left: 20px;
+        }
+
+        /* Upload Section */
+        .upload-section {
+            background: #f5f5f5;
+            border: 1px solid #999999;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+
+        .upload-section h3 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            color: #333333;
+        }
+
+        .upload-controls {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .upload-button {
+            background: #cccccc;
+            border: 1px solid #999999;
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .upload-button:hover {
+            background: #bbbbbb;
+        }
+
+        .file-input-hidden {
+            display: none;
+        }
+
+        .upload-status {
+            flex: 1;
+            color: #666666;
+            font-size: 13px;
+        }
+
+        .clear-button {
+            background: #e0e0e0;
+            border: 1px solid #999999;
+            padding: 8px 15px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .clear-button:hover {
+            background: #d0d0d0;
+        }
+
+        .filter-control select:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #e0e0e0;
+        }
+
+        /* Chatbot Styles */
+        .chatbot-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #4a90e2;
+            color: white;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 1001;
+            transition: transform 0.2s;
+        }
+
+        .chatbot-toggle:hover {
+            transform: scale(1.1);
+            background: #357abd;
+        }
+
+        .chatbot-panel {
+            position: fixed;
+            right: 20px;
+            bottom: 90px;
+            width: 400px;
+            height: 600px;
+            background: white;
+            border: 1px solid #999;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background: #4a90e2;
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            margin: 0;
+            font-size: 16px;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 15px;
+            background: #f9f9f9;
+        }
+
+        .chat-message {
+            margin-bottom: 15px;
+            padding: 10px;
+            border-radius: 8px;
+            max-width: 80%;
+            word-wrap: break-word;
+        }
+
+        .chat-message.user {
+            background: #4a90e2;
+            color: white;
+            margin-left: auto;
+            text-align: right;
+        }
+
+        .chat-message.assistant {
+            background: white;
+            border: 1px solid #ddd;
+        }
+
+        .chat-message-header {
+            font-size: 11px;
+            opacity: 0.8;
+            margin-bottom: 5px;
+        }
+
+        .chat-message-content {
+            white-space: pre-wrap;
+            font-size: 14px;
+        }
+
+        .chatbot-input-area {
+            padding: 15px;
+            border-top: 1px solid #ddd;
+            background: white;
+        }
+
+        .chatbot-input-container {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chatbot-input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .chatbot-send {
+            background: #4a90e2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .chatbot-send:hover {
+            background: #357abd;
+        }
+
+        .chatbot-send:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+
+        .chat-loading {
+            text-align: center;
+            color: #4a90e2;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h1 style="margin-bottom: 20px; font-size: 24px;">SBP Circulars Visualizer</h1>
+
+        <!-- Upload Section -->
+        <div class="upload-section">
+            <h3>Upload JSON Files</h3>
+            <div class="upload-controls">
+                <input type="file" ref="fileInput" class="file-input-hidden" accept=".json" multiple
+                    @change="handleFileUpload">
+                <button class="upload-button" @click="$refs.fileInput.click()">Choose Files...</button>
+                <span class="upload-status">
+                    <span v-if="uploadedDatasets.length === 0">No files uploaded</span>
+                    <span v-else>
+                        {{ uploadedDatasets.length }} file{{ uploadedDatasets.length > 1 ? 's' : '' }} loaded:
+                        {{ uploadedDatasets.map(d => d.filename).join(', ') }}
+                    </span>
+                </span>
+                <button v-if="uploadedDatasets.length > 0" class="clear-button" @click="clearUploadedFiles">Clear
+                    All</button>
+            </div>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar">
+            <div class="filter-control">
+                <label for="department">Department:</label>
+                <select id="department" v-model="selectedDepartment" :disabled="uploadedDatasets.length === 0">
+                    <option value="All">All Departments</option>
+                    <option v-for="dept in availableDepartments" :key="dept" :value="dept">{{ dept }}</option>
+                </select>
+            </div>
+
+            <div class="filter-control">
+                <label for="year">Year:</label>
+                <select id="year" v-model="selectedYear" :disabled="uploadedDatasets.length === 0">
+                    <option value="All">All Years</option>
+                    <option v-for="year in availableYears" :key="year" :value="year">{{ year }}</option>
+                </select>
+            </div>
+
+            <div class="search-control">
+                <label for="search">Search:</label>
+                <input type="text" id="search" v-model="searchQuery" placeholder="Enter circular title or ID...">
+            </div>
+        </div>
+
+        <!-- Main Layout -->
+        <div class="main-layout">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div v-if="loading" class="loading">Loading data...</div>
+                <div v-else-if="error" class="error">{{ error }}</div>
+                <div v-else-if="groupedDocuments.length === 0" class="no-documents">
+                    <span v-if="uploadedDatasets.length === 0">No data to display. Please upload JSON files
+                        above.</span>
+                    <span v-else>No documents found</span>
+                </div>
+                <div v-else>
+                    <div v-for="group in groupedDocuments" :key="group.year">
+                        <div class="year-header">{{ group.year }} ({{ group.documents.length }} documents)</div>
+                        <tree-node v-for="doc in group.documents" :key="generateNodeId(doc)" :node="doc" :level="0"
+                            :is-expanded="expandedNodes.has(generateNodeId(doc))"
+                            :is-selected="selectedDocument && generateNodeId(selectedDocument) === generateNodeId(doc)"
+                            :expanded-nodes="expandedNodes"
+                            :selected-node-id="selectedDocument ? generateNodeId(selectedDocument) : null"
+                            @toggle="toggleNodeExpansion" @select="selectDocument"></tree-node>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Content Area -->
+            <div class="content-area">
+                <div v-if="loading" class="loading">Loading data...</div>
+                <div v-else-if="error" class="error">{{ error }}</div>
+                <div v-else-if="!selectedDocument" class="content-placeholder">
+                    <span v-if="uploadedDatasets.length === 0">No data to display. Please upload JSON files
+                        above.</span>
+                    <span v-else>Select a document from the tree to view its content</span>
+                </div>
+                <div v-else>
+                    <!-- Document Header -->
+                    <div
+                        style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px;">
+                        <button v-if="navigationHistory.length > 0" @click="goBack"
+                            style="padding: 5px 10px; cursor: pointer; background: #e0e0e0; border: 1px solid #999; border-radius: 4px; font-size: 13px;">
+                            ← Back
+                        </button>
+                        <div style="flex: 1;"></div>
+                    </div>
+                    <div class="document-title">{{ selectedDocument.title || selectedDocument.ID || 'Untitled Document'
+                        }}</div>
+                    <div class="document-metadata">
+                        {{ selectedDocument.ID || selectedDocument.title }} •
+                        {{ selectedDocument.date || 'N/A' }} •
+                        <a :href="selectedDocument.url" target="_blank">Original Link</a>
+                    </div>
+
+                    <!-- Document Content -->
+                    <div class="document-content">
+                        <div v-if="selectedDocument.error" class="error-message">
+                            {{ selectedDocument.error }}
+                        </div>
+                        <div v-else-if="!selectedDocument.content || selectedDocument.content.length === 0">
+                            <p style="color: #666;">This document has no content text.</p>
+                        </div>
+                        <div v-else>
+                            <div v-for="(item, index) in selectedDocument.content" :key="index">
+                                <!-- Plain Text Content -->
+                                <p v-if="item.type === 'content' || item.type === 'paragraph'">{{ item.text }}</p>
+
+                                <!-- Hierarchical Content -->
+                                <div v-else-if="item.type === 'hierarchical_content'" class="hierarchical-content">
+                                    <p>{{ item.main_text }}</p>
+                                    <div v-if="item.sub_content" class="sub-content">
+                                        <div v-for="(subItem, subIndex) in item.sub_content" :key="subIndex">
+                                            <p v-if="subItem.type === 'content' || subItem.type === 'paragraph'">{{
+                                                subItem.text }}</p>
+                                            <ul v-else-if="subItem.type === 'list'">
+                                                <li v-for="(listItem, liIndex) in subItem.items" :key="liIndex">{{
+                                                    listItem }}</li>
+                                            </ul>
+                                            <table v-else-if="subItem.type === 'table'">
+                                                <thead v-if="subItem.headers && subItem.headers.length > 0">
+                                                    <tr>
+                                                        <th v-for="(header, hIndex) in subItem.headers" :key="hIndex">{{
+                                                            header }}</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(row, rIndex) in subItem.rows" :key="rIndex">
+                                                        <td v-for="(cell, cIndex) in row" :key="cIndex">{{ cell }}</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- List Content -->
+                                <ul v-else-if="item.type === 'list' && !item.ordered">
+                                    <li v-for="(listItem, liIndex) in item.items" :key="liIndex">{{ listItem }}</li>
+                                </ul>
+                                <ol v-else-if="item.type === 'list' && item.ordered">
+                                    <li v-for="(listItem, liIndex) in item.items" :key="liIndex">{{ listItem }}</li>
+                                </ol>
+
+                                <!-- Table Content -->
+                                <table v-else-if="item.type === 'table'">
+                                    <thead v-if="item.headers && item.headers.length > 0">
+                                        <tr>
+                                            <th v-for="(header, hIndex) in item.headers" :key="hIndex">{{ header }}</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(row, rIndex) in item.rows" :key="rIndex">
+                                            <td v-for="(cell, cIndex) in row" :key="cIndex">{{ cell }}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- References Section -->
+                    <div v-if="selectedDocument.references && selectedDocument.references.length > 0"
+                        class="references-section">
+                        <div class="references-title">Referenced Documents ({{ selectedDocument.references.length }}):
+                        </div>
+                        <div v-for="(reference, refIndex) in selectedDocument.references" :key="refIndex"
+                            class="reference-item" @click="handleReferenceClick(reference)">
+                            <span v-if="reference.type === 'pdf'">📕</span>
+                            <span v-else>📄</span>
+                            {{ reference.title }} →
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chatbot Toggle Button -->
+        <button class="chatbot-toggle" @click="toggleChatbot">💬</button>
+
+        <!-- Chatbot Panel -->
+        <div v-if="chatbotOpen" class="chatbot-panel">
+            <div class="chatbot-header">
+                <h3>🤖 Policy Assistant</h3>
+                <button class="chatbot-close" @click="toggleChatbot">×</button>
+            </div>
+
+            <div class="chatbot-messages" ref="chatMessages">
+                <div v-if="chatMessages.length === 0" style="text-align: center; color: #888; margin-top: 50px;">
+                    <p>👋 Hi! I'm your Policy Assistant</p>
+                    <p style="font-size: 13px;">Ask me anything about the circulars and policies!</p>
+                </div>
+                <div v-for="(msg, idx) in chatMessages" :key="idx" :class="['chat-message', msg.role]">
+                    <div class="chat-message-header">
+                        {{ msg.role === 'user' ? '👤 You' : '🤖 Assistant' }}
+                    </div>
+                    <div class="chat-message-content">{{ msg.content }}</div>
+                </div>
+                <div v-if="chatLoading" class="chat-loading">
+                    AI is thinking...
+                </div>
+            </div>
+
+            <div class="chatbot-input-area">
+                <div class="chatbot-input-container">
+                    <input type="text" class="chatbot-input" v-model="chatInput" @keypress.enter="sendChatMessage"
+                        placeholder="Ask about policies..." :disabled="chatLoading" />
+                    <button class="chatbot-send" @click="sendChatMessage" :disabled="!chatInput.trim() || chatLoading">
+                        Send
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        // TreeNode Component
+        const TreeNode = {
+            name: 'TreeNode',
+            props: {
+                node: {
+                    type: Object,
+                    required: true
+                },
+                level: {
+                    type: Number,
+                    default: 0
+                },
+                isExpanded: {
+                    type: Boolean,
+                    default: false
+                },
+                isSelected: {
+                    type: Boolean,
+                    default: false
+                },
+                expandedNodes: {
+                    type: Set,
+                    required: true
+                },
+                selectedNodeId: {
+                    type: String,
+                    default: null
+                }
+            },
+            emits: ['toggle', 'select'],
+            template: `
+                <div class="tree-node-wrapper">
+                    <div
+                        class="tree-node"
+                        :class="{ selected: isSelected }"
+                        :style="{ marginLeft: (level * 20) + 'px' }"
+                    >
+                        <span
+                            v-if="hasReferences"
+                            class="expand-icon"
+                            @click.stop="$emit('toggle', node)"
+                        >
+                            {{ isExpanded ? '▼' : '▶' }}
+                        </span>
+                        <span v-else class="expand-icon"></span>
+                        <span class="node-title" @click.stop="$emit('select', node)">
+                            <span v-if="node.type === 'pdf'">📕</span>
+                            <span v-else>📄</span>
+                            {{ node.title || node.ID || 'Untitled' }}
+                        </span>
+                    </div>
+                    <div v-if="isExpanded && hasReferences && level < 5">
+                        <tree-node
+                            v-for="(child, index) in actualReferences"
+                            :key="generateChildKey(child, index)"
+                            :node="child"
+                            :level="level + 1"
+                            :is-expanded="expandedNodes.has(generateChildNodeId(child))"
+                            :is-selected="selectedNodeId === generateChildNodeId(child)"
+                            :expanded-nodes="expandedNodes"
+                            :selected-node-id="selectedNodeId"
+                            @toggle="(node) => $emit('toggle', node)"
+                            @select="(node) => $emit('select', node)"
+                        ></tree-node>
+                    </div>
+                    <div v-if="level >= 5 && hasReferences" class="depth-warning">
+                        (Maximum nesting depth reached)
+                    </div>
+                </div>
+            `,
+            computed: {
+                hasReferences() {
+                    if (this.node.references && this.node.references.length > 0) {
+                        return true;
+                    }
+                    if (this.node.content && this.node.content.references && this.node.content.references.length > 0) {
+                        return true;
+                    }
+                    return false;
+                },
+                actualReferences() {
+                    // Handle both top-level references and nested content.references
+                    if (this.node.references && this.node.references.length > 0) {
+                        return this.node.references;
+                    }
+                    if (this.node.content && this.node.content.references) {
+                        return this.node.content.references;
+                    }
+                    return [];
+                }
+            },
+            methods: {
+                generateChildKey(child, index) {
+                    return `${child.url || child.title || 'unknown'}_${index}`;
+                },
+                generateChildNodeId(child) {
+                    return `${child.url || child.title || 'unknown'}_${child.ID || ''}`;
+                }
+            }
+        };
+
+        // Main App
+        createApp({
+            components: {
+                TreeNode
+            },
+            data() {
+                return {
+                    uploadedDatasets: [],
+                    loading: false,
+                    error: null,
+                    selectedDepartment: 'All',
+                    selectedYear: 'All',
+                    searchQuery: '',
+                    selectedDocument: null,
+                    navigationHistory: [], // Navigation stack
+                    expandedNodes: new Set(),
+                    chatbotOpen: false,
+                    chatMessages: [],
+                    chatInput: '',
+                    chatLoading: false
+                };
+            },
+            computed: {
+                availableYears() {
+                    const years = new Set();
+
+                    this.uploadedDatasets.forEach(dataset => {
+                        if (this.selectedDepartment === 'All' || this.selectedDepartment === dataset.department) {
+                            if (dataset.data && dataset.data.years) {
+                                Object.keys(dataset.data.years).forEach(year => years.add(year));
+                            }
+                        }
+                    });
+
+                    return Array.from(years).sort((a, b) => b.localeCompare(a));
+                },
+                groupedDocuments() {
+                    const filtered = this.getFilteredDocuments();
+
+                    // Group by year
+                    const grouped = {};
+                    filtered.forEach(doc => {
+                        const year = doc.year || 'Unknown';
+                        if (!grouped[year]) {
+                            grouped[year] = [];
+                        }
+                        grouped[year].push(doc);
+                    });
+
+                    // Convert to array and sort
+                    const result = Object.keys(grouped).map(year => ({
+                        year,
+                        documents: grouped[year]
+                    }));
+
+                    result.sort((a, b) => b.year.localeCompare(a.year));
+
+                    return result;
+                },
+                availableDepartments() {
+                    const departments = new Set();
+                    this.uploadedDatasets.forEach(dataset => {
+                        if (dataset.department) {
+                            departments.add(dataset.department);
+                        }
+                    });
+                    return Array.from(departments);
+                }
+            },
+            methods: {
+                handleFileUpload(event) {
+                    const files = event.target.files;
+                    if (!files || files.length === 0) return;
+
+                    Array.from(files).forEach(file => {
+                        const reader = new FileReader();
+
+                        reader.onload = (e) => {
+                            try {
+                                const data = JSON.parse(e.target.result);
+
+                                // Validate required fields
+                                if (typeof data.department !== 'string') {
+                                    console.log('Skipped file', file.name + ':', 'Missing or invalid department field');
+                                    return;
+                                }
+                                if (!data.years || typeof data.years !== 'object') {
+                                    console.log('Skipped file', file.name + ':', 'Missing or invalid years field');
+                                    return;
+                                }
+
+                                // Remove existing dataset with same department (duplicate handling)
+                                this.uploadedDatasets = this.uploadedDatasets.filter(d => d.department !== data.department);
+
+                                // Add new dataset
+                                this.uploadedDatasets.push({
+                                    department: data.department,
+                                    data: data,
+                                    filename: file.name
+                                });
+                            } catch (error) {
+                                console.log('Skipped file', file.name + ':', 'Invalid JSON format -', error.message);
+                            }
+                        };
+
+                        reader.readAsText(file);
+                    });
+
+                    // Clear file input to allow re-uploading same file
+                    event.target.value = '';
+                },
+                clearUploadedFiles() {
+                    this.uploadedDatasets = [];
+                    this.selectedDepartment = 'All';
+                    this.selectedYear = 'All';
+                    this.searchQuery = '';
+                    this.selectedDocument = null;
+                    this.navigationHistory = []; // Clear history
+                    this.expandedNodes = new Set();
+                },
+                getFilteredDocuments() {
+                    const documents = [];
+
+                    // Determine which datasets to include
+                    const datasets = [];
+                    this.uploadedDatasets.forEach(dataset => {
+                        if (this.selectedDepartment === 'All' || this.selectedDepartment === dataset.department) {
+                            datasets.push({ data: dataset.data, dept: dataset.department });
+                        }
+                    });
+
+                    // Extract documents from each dataset
+                    datasets.forEach(({ data, dept }) => {
+                        if (!data.years) return;
+
+                        Object.keys(data.years).forEach(year => {
+                            // Year filter
+                            if (this.selectedYear !== 'All' && year !== this.selectedYear) {
+                                return;
+                            }
+
+                            const yearData = data.years[year];
+
+                            // Add circulars
+                            if (yearData.circulars) {
+                                yearData.circulars.forEach(circular => {
+                                    documents.push({
+                                        ...circular,
+                                        year,
+                                        department: dept,
+                                        documentType: 'circular'
+                                    });
+                                });
+                            }
+
+                            // Add circular letters
+                            if (yearData.circular_letters) {
+                                yearData.circular_letters.forEach(letter => {
+                                    documents.push({
+                                        ...letter,
+                                        year,
+                                        department: dept,
+                                        documentType: 'circular_letter'
+                                    });
+                                });
+                            }
+                        });
+                    });
+
+                    // Search filter
+                    if (this.searchQuery.trim() !== '') {
+                        const query = this.searchQuery.toLowerCase();
+                        return documents.filter(doc => {
+                            const title = (doc.title || '').toLowerCase();
+                            const id = (doc.ID || '').toLowerCase();
+                            const date = (doc.date || '').toLowerCase();
+                            return title.includes(query) || id.includes(query) || date.includes(query);
+                        });
+                    }
+
+                    return documents;
+                },
+                generateNodeId(node) {
+                    if (!node) return 'null';
+                    return `${node.url || node.title || 'unknown'}_${node.ID || ''}`;
+                },
+                toggleNodeExpansion(node) {
+                    const nodeId = this.generateNodeId(node);
+                    if (this.expandedNodes.has(nodeId)) {
+                        this.expandedNodes.delete(nodeId);
+                    } else {
+                        this.expandedNodes.add(nodeId);
+                    }
+                    // Force reactivity
+                    this.expandedNodes = new Set(this.expandedNodes);
+                },
+                selectDocument(doc, pushToHistory = true) {
+                    if (pushToHistory && this.selectedDocument) {
+                        this.navigationHistory.push(this.selectedDocument);
+                    } else if (!pushToHistory && !this.selectedDocument) {
+                        // Reset history if selecting a top-level doc from fresh state?
+                        // For now, let history accumulate or manual clear
+                    }
+
+                    // Handle PDF Structure (Flatten pages)
+                    // PDFs often have content -> content -> pages -> [ { content: [...] }, ... ]
+                    if (doc.content && doc.content.content && doc.content.content.pages) {
+                        const rawPages = doc.content.content.pages;
+                        let flattenedContent = [];
+
+                        // Iterate pages
+                        rawPages.forEach(page => {
+                            if (page.content && Array.isArray(page.content)) {
+                                // Map page content items
+                                const pageItems = page.content.map(item => {
+                                    // Fix type mismatch: JSON has 'text', UI expects 'content' or 'paragraph'
+                                    if (item.type === 'text') {
+                                        return { ...item, type: 'content', text: item.content || item.text }; // item.content sometimes used in certain scrapers, check both
+                                    }
+                                    return item;
+                                });
+                                flattenedContent = flattenedContent.concat(pageItems);
+                            }
+                        });
+
+                        this.selectedDocument = {
+                            title: doc.title,
+                            ID: doc.title,
+                            date: 'N/A',
+                            url: doc.url,
+                            content: flattenedContent,
+                            references: doc.content.references || []
+                        };
+                        return;
+                    }
+
+                    // Check if doc has nested content structure (reference) or flat structure (top-level)
+                    if (doc.content && Array.isArray(doc.content)) {
+                        // Top-level document: content is direct array
+                        this.selectedDocument = doc;
+                    } else if (doc.content && doc.content.content) {
+                        // Reference document: content is nested, flatten it
+                        this.selectedDocument = {
+                            title: doc.title,
+                            ID: doc.title, // References don't have ID field, use title
+                            date: 'N/A', // References may not have date
+                            url: doc.url,
+                            content: doc.content.content, // Unwrap nested content
+                            references: doc.content.references || [] // Unwrap nested references
+                        };
+                    } else {
+                        // Empty, malformed, or explicitly errored document
+                        this.selectedDocument = {
+                            title: doc.title || 'Untitled',
+                            ID: doc.ID || 'No ID',
+                            date: doc.date || 'N/A',
+                            url: doc.url || '',
+                            content: [],
+                            references: [],
+                            error: doc.error // Capture explicit error from JSON if present
+                        };
+                    }
+                },
+                handleReferenceClick(reference) {
+                    this.selectDocument(reference, true);
+
+                    // Optionally expand the node in the tree if it exists
+                    const nodeId = this.generateNodeId(reference);
+                    this.expandedNodes.add(nodeId);
+                    this.expandedNodes = new Set(this.expandedNodes);
+                },
+                goBack() {
+                    if (this.navigationHistory.length > 0) {
+                        const previousDoc = this.navigationHistory.pop();
+                        // Restore without pushing to history again
+                        this.selectedDocument = previousDoc;
+                    }
+                },
+                toggleChatbot() {
+                    this.chatbotOpen = !this.chatbotOpen;
+                },
+                async sendChatMessage() {
+                    if (!this.chatInput.trim() || this.chatLoading) return;
+
+                    const userMessage = { role: 'user', content: this.chatInput };
+                    this.chatMessages.push(userMessage);
+
+                    const messageText = this.chatInput;
+                    this.chatInput = '';
+                    this.chatLoading = true;
+
+                    // Scroll to bottom after adding user message
+                    this.$nextTick(() => {
+                        const messagesDiv = this.$refs.chatMessages;
+                        if (messagesDiv) {
+                            messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                        }
+                    });
+
+                    try {
+                        // Build context from selected document and uploaded datasets
+                        let context = '';
+                        if (this.selectedDocument) {
+                            context += `Current Document: ${this.selectedDocument.title}\n`;
+                            context += `ID: ${this.selectedDocument.ID}\n`;
+                            if (this.selectedDocument.content && this.selectedDocument.content.length > 0) {
+                                const contentText = this.selectedDocument.content
+                                    .map(item => item.text || '')
+                                    .join(' ')
+                                    .substring(0, 1000);
+                                context += `Content preview: ${contentText}\n`;
+                            }
+                        }
+
+                        // Add dataset context
+                        if (this.uploadedDatasets.length > 0) {
+                            context += `\nAvailable datasets: ${this.uploadedDatasets.map(d => d.filename).join(', ')}\n`;
+                            context += `Total documents loaded: ${this.allDocuments.length}\n`;
+                        }
+
+                        const response = await fetch('http://localhost:3000/api/sysadmin/chatbot', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${localStorage.getItem('token')}`
+                            },
+                            body: JSON.stringify({
+                                message: messageText,
+                                policyContext: {
+                                    name: 'SBP Circulars',
+                                    description: context,
+                                    selectedDocument: this.selectedDocument
+                                }
+                            })
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to get response from chatbot');
+                        }
+
+                        const data = await response.json();
+                        const aiMessage = { role: 'assistant', content: data.response };
+                        this.chatMessages.push(aiMessage);
+                    } catch (error) {
+                        console.error('Chatbot error:', error);
+                        const errorMessage = {
+                            role: 'assistant',
+                            content: 'Sorry, I encountered an error. Please try again or make sure you are logged in.'
+                        };
+                        this.chatMessages.push(errorMessage);
+                    } finally {
+                        this.chatLoading = false;
+
+                        // Scroll to bottom after adding AI message
+                        this.$nextTick(() => {
+                            const messagesDiv = this.$refs.chatMessages;
+                            if (messagesDiv) {
+                                messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                            }
+                        });
+                    }
+                }
+            },
+            mounted() {
+                // No data loading on mount - app starts in empty state
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

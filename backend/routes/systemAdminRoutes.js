@@ -339,42 +339,138 @@ router.post('/chatbot', verifyToken, isSystemAdmin, async (req, res) => {
 
 // POST /api/sysadmin/scraper/run - Run scraper
 router.post('/scraper/run', verifyToken, isSystemAdmin, async (req, res) => {
-    try {
-        // Placeholder for scraper logic
-        // You can implement your scraping logic here
+    console.log('=== SCRAPER ENDPOINT CALLED ===');
+    console.log('User:', req.user);
 
-        // Simulating scraper results
-        const scraperResults = {
+    try {
+        const { spawn } = require('child_process');
+        const path = require('path');
+        const fs = require('fs');
+
+        // Path to the scraper script
+        const scraperPath = path.join(__dirname, '../../scrape/enhanced_selectors_structure_aware.py');
+
+        console.log('Looking for scraper at:', scraperPath);
+        console.log('Scraper exists:', fs.existsSync(scraperPath));
+
+        // Check if scraper exists
+        if (!fs.existsSync(scraperPath)) {
+            console.log('Scraper not found! Returning cached results message.');
+            return res.json({
+                timestamp: new Date().toISOString(),
+                status: 'warning',
+                message: `Scraper script not found at: ${scraperPath}. Click "Open Scraper UI" to view existing data.`,
+                results: [
+                    {
+                        source: 'Scraper Status',
+                        updates: '⚠️ Python scraper not executed. Existing JSON files available in Scraper UI.',
+                        lastChecked: new Date().toISOString()
+                    }
+                ],
+                summary: {
+                    totalSources: 1,
+                    updatesFound: 0,
+                    noUpdates: 1
+                }
+            });
+        }
+
+        console.log('Starting Python scraper...');
+
+        // Try different Python commands (python, python3, py)
+        let pythonCmd = 'python';
+
+        // Test which Python command works
+        const { execSync } = require('child_process');
+        try {
+            execSync('python --version', { stdio: 'pipe' });
+            pythonCmd = 'python';
+            console.log('Using python command');
+        } catch (e) {
+            try {
+                execSync('python3 --version', { stdio: 'pipe' });
+                pythonCmd = 'python3';
+                console.log('Using python3 command');
+            } catch (e2) {
+                try {
+                    execSync('py --version', { stdio: 'pipe' });
+                    pythonCmd = 'py';
+                    console.log('Using py command');
+                } catch (e3) {
+                    console.error('No Python found!');
+                    return res.json({
+                        timestamp: new Date().toISOString(),
+                        status: 'error',
+                        message: '⚠️ Python not found on system. Please install Python to run the scraper.',
+                        results: [{
+                            source: 'Python Status',
+                            updates: 'Python interpreter not found. Install Python 3.x to run scraper.',
+                            lastChecked: new Date().toISOString()
+                        }],
+                        summary: { totalSources: 1, updatesFound: 0, noUpdates: 1 }
+                    });
+                }
+            }
+        }
+
+        // Run the scraper (async, don't wait for completion)
+        const pythonProcess = spawn(pythonCmd, [scraperPath], {
+            cwd: path.join(__dirname, '../../scrape'),
+            stdio: 'pipe'
+        });
+
+        console.log('Python process spawned with PID:', pythonProcess.pid);
+
+        let scraperOutput = '';
+        let scraperError = '';
+
+        pythonProcess.stdout.on('data', (data) => {
+            scraperOutput += data.toString();
+            console.log(`[SCRAPER OUTPUT]: ${data}`);
+        });
+
+        pythonProcess.stderr.on('data', (data) => {
+            scraperError += data.toString();
+            console.error(`[SCRAPER ERROR]: ${data}`);
+        });
+
+        pythonProcess.on('error', (error) => {
+            console.error('[SCRAPER SPAWN ERROR]:', error);
+        });
+
+        pythonProcess.on('close', (code) => {
+            console.log(`[SCRAPER EXIT] Process exited with code ${code}`);
+            if (code === 0) {
+                console.log('✅ Scraper completed successfully!');
+            } else {
+                console.error('❌ Scraper failed with error:', scraperError);
+            }
+        });
+
+        // Return immediate response
+        res.json({
             timestamp: new Date().toISOString(),
-            status: 'success',
+            status: 'running',
+            message: '🚀 Python scraper is now running! This may take several minutes. Check backend console for progress.',
             results: [
                 {
-                    source: 'Regulatory Website 1',
-                    updates: 'No new updates found',
-                    lastChecked: new Date().toISOString()
-                },
-                {
-                    source: 'Compliance Portal',
-                    updates: 'New KYC guidelines available',
-                    lastChecked: new Date().toISOString()
-                },
-                {
-                    source: 'AML Database',
-                    updates: 'Updated sanctions list detected',
+                    source: 'SBP Circular Scraper (Python)',
+                    updates: '🔄 Scraping in progress... New data will be saved to /scrape/*.json files. Check backend logs for real-time progress.',
                     lastChecked: new Date().toISOString()
                 }
             ],
             summary: {
-                totalSources: 3,
-                updatesFound: 2,
-                noUpdates: 1
+                totalSources: 1,
+                updatesFound: 0,
+                noUpdates: 0
             }
-        };
-
-        res.json(scraperResults);
+        });
     } catch (err) {
-        console.error('Error running scraper:', err);
-        res.status(500).json({ error: err.message });
+        console.error('[SCRAPER ROUTE ERROR]:', err);
+        res.status(500).json({
+            error: err.message,
+            details: 'Failed to start scraper process. Check backend logs for details.'
+        });
     }
 });
 

@@ -1,0 +1,86 @@
+{
+  "department": "BSD",
+  "url": "https://www.sbp.org.pk/bsd/index.htm",
+  "total_years_processed": 7,
+  "processing_timestamp": "2025-12-10T13:17:16.395659",
+  "years": {
+    "2006": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    },
+    "2005": {
+      "circulars": [],
+      "circular_letters": [
+        {
+          "title": "Risk Management Framework–Disclosure in Annual Accounts",
+          "ID": "BSD Circular Letter No.2",
+          "date": "Jan 07, 2005",
+          "url": "https://www.sbp.org.pk/bsd/2005/CL2.htm",
+          "content": [],
+          "references": [
+            {
+              "type": "circular",
+              "title": "BSD Circular No. 7",
+              "error": "Could not construct URLs",
+              "content": {
+                "title": "BSD Circular No. 7"
+              }
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 1
+      }
+    },
+    "2004": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    },
+    "2003": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    },
+    "2002": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    },
+    "2001": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    },
+    "2000": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    }
+  },
+  "summary": {
+    "total_circulars": 0,
+    "total_circular_letters": 1
+  }
+}

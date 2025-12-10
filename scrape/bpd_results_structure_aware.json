@@ -1,0 +1,298 @@
+{
+  "department": "BPD",
+  "url": "https://www.sbp.org.pk/bpd/index.htm",
+  "total_years_processed": 1,
+  "processing_timestamp": "2025-12-10T19:27:47.014485",
+  "years": {
+    "2025": {
+      "circulars": [
+        {
+          "title": "Consolidated Customer Onboarding Framework",
+          "ID": "BPRD Circular No. 01",
+          "date": "July 25, 2025",
+          "url": "https://www.sbp.org.pk/bprd/2025/C1.htm",
+          "content": [
+            {
+              "type": "content",
+              "text": "Please refer to SBP’s AML/CFT/CPF Regulations for SBP Regulated Entities (REs) on the subject of customer due diligence and onboarding related requirements.\n\n2. To streamline the account opening/customer onboarding process and improve the customer experience, the existing frameworks/instructions on the subject have been consolidated into a single document, viz. Consolidated Customer Onboarding Framework . The framework lays out the requirements to be fulfilled by SBP REs while establishing relationships, including the information and documentary requirements for different types of customers and accounts/wallets.\n\n3. Accordingly, necessary amendments have been made in the existing instructions on customer onboarding due to consolidation into the framework ( Appendix-A ).\n\n4. SBP REs are advised to ensure meticulous compliance of the above instructions within 03 months from date of issuance of this Circular.\n\n5. Please acknowledge receipt.\n\nEnclosed:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "1. Consolidated Customer Onboarding Framework",
+                "2. Appendix-A"
+              ]
+            }
+          ],
+          "references": [
+            {
+              "type": "pdf",
+              "title": "Consolidated Customer Onboarding Framework.",
+              "url": "https://www.sbp.org.pk/bprd/2025/C1-Consolidated-Customer-Onboarding-Framework.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Appendix-A",
+              "url": "https://www.sbp.org.pk/bprd/2025/C1-Annex.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Consolidated Customer Onboarding Framework",
+              "url": "https://www.sbp.org.pk/bprd/2025/C1-Consolidated-Customer-Onboarding-Framework.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Appendix-A",
+              "url": "https://www.sbp.org.pk/bprd/2025/C1-Annex.pdf"
+            }
+          ]
+        },
+        {
+          "title": "Regulatory Framework on Recovery Planning",
+          "ID": "BPRD Circular No. 02",
+          "date": "July 30, 2025",
+          "url": "https://www.sbp.org.pk/bprd/2025/C2.htm",
+          "content": [
+            {
+              "type": "content",
+              "text": "I n order to strengthen recovery and resolution regime in Pakistan, various amendments in relevant laws i.e. Banking Companies Ordinance (BCO), 1962 and Deposit Protection Corporation (DPC) Act, 2016 have recently been enacted. The amendments, inter alia, provide explicit legal powers to State Bank of Pakistan (SBP) to require the banks to submit a recovery plan in the form, content and manner as directed by the SBP, remove any impediments to the implementation of the plan, revise and update recovery plan etc. 2. In this regard, to outline SBP’s supervisory expectations for recovery planning by banks and to harmonize recovery planning practices across the banking industry, SBP has developed a regulatory framework on recovery planning (enclosed), in line with the international standards and best practices. 3. The banks are required to develop and maintain comprehensive recovery plans on group wide basis including their subsidiaries and associates, where applicable. The banks shall develop and submit their first Recovery Plans in light of this framework, duly approved by their Board of Directors to relevant Banking Supervision Departments by June 30, 2026 based on the audited financial statements as of December 31, 2025. Subsequently, all the banks shall submit their Board approved recovery plans to relevant Supervision Department by 30th June of each year based on the latest audited financial statements or within 15 days of the Board’s approval in case of revision in the plan based on material changes during the year. 4. Any violation of these instructions shall attract strict punitive action under the relevant provisions of the BCO, 1962. 5. Please acknowledge receipt.\n\nEnclosed: Regulatory Framework on Recovery Planning"
+            }
+          ],
+          "references": [
+            {
+              "type": "pdf",
+              "title": "Regulatory Framework on Recovery Planning",
+              "url": "https://www.sbp.org.pk/bprd/2025/C2-Annex.pdf"
+            }
+          ]
+        },
+        {
+          "title": "Basel Capital Adequacy Framework: Revised Instructions for Credit Risk (Standardized Approach)",
+          "ID": "BPRD Circular No. 03",
+          "date": "September 24, 2025",
+          "url": "https://www.sbp.org.pk/bprd/2025/C3.htm",
+          "content": [
+            {
+              "type": "content",
+              "text": "Please refer to BSD Circular No. 8 of June 27, 2006, and BPRD Circular No. 6 of August 15, 2013, regarding implementation of Basel Capital Adequacy Framework in Pakistan. 2. The Global Financial Crisis (GFC) exposed critical weaknesses in the financial system, prompting global regulatory reforms. In response, the Basel III framework was introduced by the Basel Committee on Banking Supervision (BCBS) to address shortcomings of the pre-crisis regime and strengthen the resilience of the banking sector. 3. BCBS reforms are broadly divided into two phases. Phase I focused on enhancing capital adequacy, introducing liquidity and leverage ratios, and establishing the D-SIB framework. Phase II emphasizes revisions to the risk-weighting regime, leverage ratio, and other enhancements. 4. SBP has already implemented Phase I reforms. As a first step toward adopting Phase II reforms in a smooth and timely manner, and in line with BCBS guidance, SBP has developed revised instructions on the Standardized Approach for Credit Risk. 5. These revised instructions will be implemented across the industry on a parallel run basis from September 30, 2025 to June 30, 2026 (four quarters). This approach will allow SBP to assess practical challenges and incorporate industry feedback, if required, for final implementation. 6. During the parallel run, banks, Digital Banks and DFIs shall submit capital adequacy returns under both existing and revised instructions as follows:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "a. Existing instructions:"
+              ]
+            },
+            {
+              "type": "content",
+              "text": "7. Submissions under the revised framework shall be sent in soft copy (Excel format) to [email protected] within the prescribed timelines. 8. All other instructions on the subject remain unchanged. Please acknowledge receipt.\n\nEnclosed: Instructions for Credit Risk Reporting Template"
+            }
+          ],
+          "references": [
+            {
+              "type": "circular",
+              "title": "BSD Circular No. 8 of June 27, 2006"
+            },
+            {
+              "type": "circular",
+              "title": "BPRD Circular No. 6 of August  15, 2013"
+            },
+            {
+              "type": "pdf",
+              "title": "Instructions for Credit Risk",
+              "url": "https://www.sbp.org.pk/bprd/2025/C3-AnnexA.pdf"
+            }
+          ]
+        },
+        {
+          "title": "Business Conduct and Fair Treatment of Consumers Regulatory Framework (BC&FRF)",
+          "ID": "BPRD Circular No. 04",
+          "date": "October 17, 2025",
+          "url": "https://www.sbp.org.pk/bprd/2025/C4.htm",
+          "content": [
+            {
+              "type": "content",
+              "text": "State Bank of Pakistan (SBP) has undertaken a comprehensive exercise with the aim , inter alia, to streamline existing regulatory instructions regarding business conduct and Fair Treatment of Consumers (FTC) regime, to strengthen it and align it with best international market practices. In pursuance of this exercise, existing regulatory instructions / guidelines - issued vide various circulars / circular letters – have been reviewed, updated, strengthened, where necessary, and consolidated into a single framework - “Business Conduct and Fair Treatment of Consumers Regulatory Framework (BC&FRF)” for Financial Institutions (FIs). 2. The BC&FRF shall become effective immediately for FIs (excluding EMIs) except Pillar-1 of Part II on “Governance & Oversight” which shall become effective from January 01, 2026. Further, this framework shall become effective for EMIs from January 01, 2026. The BC&FRF shall henceforth serve as the governing framework for ensuring responsible business conduct & FTC in FIs. However, this shall not retrospectively affect the applicability of earlier circulars and/or decision undertaken with reference to these. 3. Pursuant to the issuance of this framework, the circulars / circular letters listed at Annexure-A of the framework, stand withdrawn/superseded. Additionally, a comparative table, detailing all instructions of earlier circulars / circular letters, whether in their original or revised / updated form, has also been enclosed at Appendix of the framework for ease of FIs. 4. The FIs are advised to ensure meticulous compliance with the BC&FRF, failing which shall attract punitive action under relevant provisions of the applicable laws. 5. Please acknowledge receipt.\n\nEnclosed:"
+            },
+            {
+              "type": "list",
+              "items": [
+                "1. i. Business Conduct and Fair Treatment of Consumers Regulatory Framework (BC&FRF)",
+                "2. ii. Annexure-A : List of Circulars / Circular Letters withdrawn / superseded",
+                "3. iii. Appendix : Comparative Sheet"
+              ]
+            }
+          ],
+          "references": [
+            {
+              "type": "pdf",
+              "title": "“Business Conduct and Fair Treatment of Consumers Regulatory Framework (BC&FRF)”",
+              "url": "https://www.sbp.org.pk/bprd/2025/C4-BC&FRF.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Annexure-A",
+              "url": "https://www.sbp.org.pk/bprd/2025/C4-Annexure-A.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Appendix",
+              "url": "https://www.sbp.org.pk/bprd/2025/C4-APPENDIX.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Business Conduct and Fair Treatment of Consumers Regulatory Framework (BC&FRF)",
+              "url": "https://www.sbp.org.pk/bprd/2025/C4-BC&FRF.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Annexure-A: List of Circulars / Circular Letters withdrawn / superseded",
+              "url": "https://www.sbp.org.pk/bprd/2025/C4-Annexure-A.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": "Appendix",
+              "url": "https://www.sbp.org.pk/bprd/2025/C4-APPENDIX.pdf"
+            },
+            {
+              "type": "pdf",
+              "title": ": Comparative Sheet",
+              "url": "https://www.sbp.org.pk/bprd/2025/C4-APPENDIX.pdf"
+            }
+          ]
+        }
+      ],
+      "circular_letters": [
+        {
+          "title": "Basel III Capital Framework: Treatment of FX Translation Reserves",
+          "ID": "BPRD Circular Letter No. 02",
+          "date": "January 24, 2025",
+          "url": "https://www.sbp.org.pk/bprd/2025/CL2.htm",
+          "content": [
+            {
+              "type": "content",
+              "text": "Please refer to Instructions for BASEL-III Implementation in Pakistan issued vide BPRD Circular No. 6 of 2013."
+            },
+            {
+              "type": "list",
+              "items": [
+                "1. It has been decided to treat Foreign Exchange Translation Reserves as part of Common Equity Tier-1 (CET-1) Capital with effect from December 31, 2024.",
+                "2. All other instructions on the subject shall remain unchanged. Please acknowledge receipt."
+              ]
+            }
+          ],
+          "references": [
+            {
+              "type": "circular",
+              "title": "BPRD Circular No. 6 of 2013"
+            }
+          ]
+        },
+        {
+          "title": "Facilitation Framework - Benazir Income Support Programme (BISP) Sahulat Account",
+          "ID": "BPRD Circular Letter No. 17",
+          "date": "July 22, 2025",
+          "url": "https://www.sbp.org.pk/bprd/2025/CL17.htm",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                {
+                  "text": "1. Please refer to BPRD Circular No. 01 of April 08, 2024 on the captioned subject. The Facilitation Framework - Benazir Income Support Programme (BISP) Sahulat Account requires all banks and Microfinance Banks (MFBs) (hereinafter referred to as banks) to open accounts of the BISP beneficiaries enabling them to receive financial assistance directly into their bank accounts. In order to further improve the process, it has been decided to revise the aforementioned framework. The revised framework with modifications listed below, shall be adopted initially for onboarding BISP beneficiaries in Karachi, Lahore, Islamabad, Quetta, Peshawar, Muzaffargarh, Muzaffarabad and Gilgit during the pilot phase. After the pilot phase, scope of the framework, with adjustments, if required, shall be extended to other cities/districts. A. Onboarding of BISP Beneficiaries:",
+                  "sub_items": [
+                    "i. The banks shall use a mutually secure arrangement to receive account opening information from BISP, which at the minimum shall include the beneficiary’s full name (as per CNIC), CNIC number, date of birth and residential address. Further, before sending information to the banks, BISP shall ensure through NADRA that CNICs and other information of beneficiaries are valid.",
+                    "ii. After receiving the information from BISP, banks shall carry out screening of beneficiary’s particulars against the lists of persons designated by the United Nations Security Council (UNSC) and proscribed under The Anti-Terrorism Act, 1997 as well as other relevant lists.",
+                    "iii. Banks shall open accounts of beneficiaries in the branches identified by BISP. Thereafter, banks shall generate IBANs of such accounts and share them with BISP, under a mutually agreed and secure arrangement. However, the accounts, so opened, shall remain inactive until the activation process is completed.",
+                    "iv. In certain cases, as per modalities to be determined by SBP/BISP, there will be an option of transferring of account to a branch in close proximity of the beneficiary or another bank if the same bank’s branch is not available in the area.",
+                    "v. BISP will introduce an SMS service and web portal for its beneficiaries wherein they can send/input their CNIC numbers to a short code/web portal for the purpose of receiving information regarding the name of the bank and address and location of the bank branch where the account is opened as well as the scheduled dates of their branch visit for the account activation and payments.",
+                    "vi. Banks shall activate beneficiaries’ bank accounts, upon their visit to the relevant branch along with their valid CNIC, through Biometric Verification (BV), and inform the same to BISP as per agreed mechanism. If BV could not be performed due to genuine reasons, banks shall document the reasons, and conduct NADRA Verisys of BISP beneficiary for account activation purpose and inform BISP accordingly.",
+                    "vii. Banks shall also obtain information regarding date of issuance & expiry of CNIC, place of birth, father’s/spouse name, mother’s maiden name and mobile number (if available) from the BISP beneficiary.",
+                    "viii. Banks shall also take verbal consent from the BISP beneficiaries and record the same through marking relevant check box in their systems, for the following:",
+                    "a. Foreign Account Tax Compliance Act (FATCA)/ Common Reporting Standard (CRS), wherever required.",
+                    "b. Acceptance of Terms and Conditions (T&Cs) of these accounts.",
+                    "c. Account opening and use of information/documents provided through the above process for due diligence and supervisory functions.",
+                    "i. During the visit of the beneficiaries, the bank will activate their accounts and initiate the process of issuance of a cheque book with minimum five leaves.",
+                    "ii. For beneficiaries whose BV could not be conducted due to genuine reasons, banks shall initiate PayPak debit card issuance process and inform BISP accordingly. In this context, banks shall issue cards to BISP beneficiaries, and shall ensure to facilitate them in generation of PIN on these cards during their second visit to the branches after two weeks. For the said purpose, banks may use any or all of the following options:",
+                    "1. Call centers",
+                    "2. ATMs",
+                    "3. SMS",
+                    "4. Web Portals",
+                    "5. Others",
+                    "i. After account activation, BISP will disburse the funds into these accounts through RAAST/IBFT and inform the beneficiaries to visit their designated bank branches to collect funds from the branch through cheque leaf or PayPak debit card (as applicable).",
+                    "ii. During second visit of the beneficiaries, banks will provide cheque books or debit card, as applicable and allow them to withdraw cash. For the purpose of cash withdrawal through cheques, beneficiaries shall place their thumb impression on cheque in front of the bank’s teller/staff. In cases where BV cannot be performed due to genuine reasons, banks shall document the reason and conduct NADRA Verisys for payment purpose.",
+                    "iii. The banks shall not activate internet/ mobile banking facilities on such accounts. B. Enablement of Payments to BISP Beneficiaries through ATMs and Branches",
+                    {
+                      "text": "i. BISP beneficiaries shall be enabled to withdraw funds from their account through biometric verification (BV) using the following channels:",
+                      "sub_items": [
+                        "a. Bank branches",
+                        "b. Automated Teller Machines (ATMs)"
+                      ]
+                    },
+                    "ii. For the aforementioned purpose, banks shall make necessary changes in their systems for the enablement of cash withdrawal through BV from their branches and ATMs.",
+                    "iii. Banks will facilitate payment to BISP beneficiaries initially through cheques until the enablement of BV-based disbursements through branches and ATMs.",
+                    "iv. In cases where banks can facilitate the beneficiaries for cash withdrawals at their ATMs and branches through BV during the pilot phase, they may not be required to issue cheque books.",
+                    "i. Beneficiaries who have been issued PayPak debit cards will be enabled to use ATM of any bank for withdrawal of their cash. C. Accounts Operations :",
+                    "i. Banks shall allow normal operations in these accounts as permissible under branchless banking level 1 accounts.",
+                    "ii. There shall be no charges on cash withdrawal from ATMs on off-us transactions for BISP beneficiaries. D. Facilitation and Support :",
+                    "i. The banks shall establish a dedicated function for the purpose of information sharing and ongoing coordination with BISP, this function shall also be responsible for resolution of issues facing the BISP and its beneficiaries.",
+                    "ii. The banks shall arrange training programs for their employees to ensure facilitation to the BISP beneficiaries during the account/ ATM PIN activation and subsequent disbursement process.",
+                    "iii. The banks shall put in place mechanism for timely resolution of complaints of BISP beneficiaries and ensure 24/7 availability of customer support services."
+                  ]
+                }
+              ]
+            }
+          ],
+          "references": [
+            {
+              "type": "circular",
+              "title": "BPRD Circular No. 01 of April 08, 2024"
+            }
+          ]
+        },
+        {
+          "title": "AMENDMENT IN REG. G-4 OF CORPORATE GOVERNANCE REGULATORY FRAMEWORK",
+          "ID": "BPRD Circular Letter No. 21",
+          "date": "November 07, 2025",
+          "url": "https://www.sbp.org.pk/bprd/2025/CL21.htm",
+          "content": [
+            {
+              "type": "list",
+              "items": [
+                "1. Please refer to BPRD Circular No. 5 of 2021 on Corporate Governance Regulatory Framework. To strengthen institutional arrangements among banks and their wholly-owned subsidiaries, it has been decided to allow the board member(s) of a bank to work as board member(s) of its associated exchange company by introducing an amendment in para 1(f) of Reg. G-4 of Corporate Governance Regulatory Framework as under:",
+                "2. i. Exchange Company except that President/CEO or Director of a bank may serve as a director of exchange company wholly owned by that bank subject to submission of additional affidavit as per Appendix - V;",
+                "3. ii. Stock Exchange;",
+                "4. iii. Corporate Brokerage firm/entity;",
+                "5. iv. Credit Information Bureau;",
+                "6. v. Any company/entity owned and controlled by the persons mentioned at (i) to (iv) above.",
+                "7. All other instructions on the subject shall remain unchanged."
+              ]
+            },
+            {
+              "type": "content",
+              "text": "“ Reg G-4, Para 1(f): No person can serve as a Director and/or President/CEO of a bank/DFI, if he/she is holding substantial interest or is working as Chairman, Director, CEO, Chief Financial Officer, Chief Internal Auditor, Financial Advisor, Research Analyst, Trader or member (by whatever name/designation called) of a:\n\nExplanation: A board member of Pakistan Stock Exchange (PSX) may be appointed as board member of any bank/DFI if he/she is an independent director of PSX, provided that he/she does not have any association with other categories mentioned above. ”\n\nEnclosed : Appendix - V"
+            }
+          ],
+          "references": [
+            {
+              "type": "circular",
+              "title": "BPRD Circular No. 5 of 2021"
+            },
+            {
+              "type": "pdf",
+              "title": "Appendix - V",
+              "url": "https://www.sbp.org.pk/bprd/2025/CL21-Annex.pdf"
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "total_circulars": 4,
+        "total_circular_letters": 3
+      }
+    }
+  },
+  "summary": {
+    "total_circulars": 4,
+    "total_circular_letters": 3
+  },
+  "documents": []
+}

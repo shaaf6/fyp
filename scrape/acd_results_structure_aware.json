@@ -1,0 +1,21 @@
+{
+  "department": "ACD",
+  "url": "https://www.sbp.org.pk/acd/index.htm",
+  "total_years_processed": 1,
+  "processing_timestamp": "2025-12-10T19:22:42.611707",
+  "years": {
+    "2025": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    }
+  },
+  "summary": {
+    "total_circulars": 0,
+    "total_circular_letters": 0
+  },
+  "documents": []
+}

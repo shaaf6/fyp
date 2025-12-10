@@ -1,0 +1,36 @@
+{
+  "department": "MFD",
+  "url": "https://www.sbp.org.pk/MFD/index.htm",
+  "total_years_processed": 3,
+  "processing_timestamp": "2025-10-20T16:41:03.663375",
+  "years": {
+    "2011": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    },
+    "2010": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    },
+    "2009": {
+      "circulars": [],
+      "circular_letters": [],
+      "summary": {
+        "total_circulars": 0,
+        "total_circular_letters": 0
+      }
+    }
+  },
+  "summary": {
+    "total_circulars": 0,
+    "total_circular_letters": 0
+  }
+}
